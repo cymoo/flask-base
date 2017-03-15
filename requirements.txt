@@ -1,0 +1,5 @@
+flask
+arrow
+pillow
+flask-admin
+flask-login
