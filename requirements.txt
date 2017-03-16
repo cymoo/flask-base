@@ -1,4 +1,6 @@
 flask
+pymongo
+gevent
 arrow
 pillow
 flask-admin
