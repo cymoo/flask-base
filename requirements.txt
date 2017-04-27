@@ -1,7 +1,10 @@
 flask
 pymongo
+mongoengine
+redis
 gevent
 arrow
 pillow
 flask-admin
 flask-login
+flask-script

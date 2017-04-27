@@ -1,2 +1,2 @@
-from .main import create_app
+from .creator import create_app
 from .config import config

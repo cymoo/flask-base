@@ -20,3 +20,14 @@
     {% block header_js %}{% endblock %}
     {% block title %}<title>首页</title>{% endblock %}
 </head>
+<body>
+    {% block header %}{% endblock %}
+    {% block content %}{% endblock %}
+    {% block footer %}{% endblock %}
+    <script src="{{ url_for('static', filename='vendors/vue/vue.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendors/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendors/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendors/axios.min.js') }}"></script>
+    {% block footer_js %}{% endblock %}
+</body>
+</html>
