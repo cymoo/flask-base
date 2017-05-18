@@ -1,6 +1,17 @@
 flask
+
+# for MySQL
+-----
+mysqlclient
+SQLAlchemy
+alembic
+flask-migrate
+-----
+# for MongoDB
+-----
 pymongo
 mongoengine
+-----
 redis
 gevent
 arrow
