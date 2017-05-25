@@ -67,5 +67,3 @@ def register_error_handler(app):
     @app.errorhandler(500)
     def internal_server_error(error):
         return send_from_directory(app.config['STATIC_PAGE_FOLDER'], '500.html'), 500
-
-

@@ -1,4 +1,5 @@
 flask
+uwsgi
 
 # for MySQL
 -----
@@ -11,6 +12,7 @@ flask-migrate
 -----
 pymongo
 mongoengine
+blinker
 -----
 redis
 gevent

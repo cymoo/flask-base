@@ -1,12 +1,12 @@
 import os
 
-APP_DIR = os.path.dirname(__file__)
+BASE_PATH = os.path.dirname(__file__)
 
 
 class Config:
     CSRF_ENABLED = True
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'keep-calm-and-carry-on'
-    STATIC_PAGE_FOLDER = os.path.join(APP_DIR, 'static/page')
+    STATIC_PAGE_FOLDER = os.path.join(BASE_PATH, 'app/static/page')
 
 
 class DevelopmentConfig(Config):

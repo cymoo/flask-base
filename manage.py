@@ -4,6 +4,20 @@ from wsgi import app
 
 manager = Manager(app)
 
+# used by SQL backend
+# from flask_migrate import Migrate, MigrateCommand
+# from app.extensions import db
+
+# migrate = Migrate(db.app, db)
+
+
+# @manager.command
+# def create_db():
+#     db.create_all()
+
+
+# manager.add_command('db', MigrateCommand)
+
 
 @manager.command
 def runserver(port=5000, with_profile=False):

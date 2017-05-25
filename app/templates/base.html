@@ -6,16 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit" />
     <meta name="Author" content="Cymoo">
+    <meta name="Keywords" content="foo bar baz">
     <meta name="Description" content="foo bar baz">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
-    <link rel="stylesheet" href="{{ url_for('static', filename='vendors/bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='vendors/font-awesome/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='vendors/animate.css') }}">
+    <link rel="shortcut icon" href="{{ static('img/favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ static('vendors/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ static('vendors/font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ static('vendors/animate.css') }}">
     {% block css %}{% endblock %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ static('css/style.css') }}">
     <!--[if lt IE 9]>
-		<script src="{{ url_for('static', filename='vendors/respond.min.js') }}"></script>
-		<script src="{{ url_for('static', filename='vendors/html5shiv.min.js') }}"></script>
+		<script src="{{ static('vendors/respond.min.js') }}"></script>
+		<script src="{{ static('vendors/html5shiv.min.js') }}"></script>
     <![endif]-->
     {% block header_js %}{% endblock %}
     {% block title %}<title>首页</title>{% endblock %}
@@ -24,10 +25,10 @@
     {% block header %}{% endblock %}
     {% block content %}{% endblock %}
     {% block footer %}{% endblock %}
-    <script src="{{ url_for('static', filename='vendors/vue/vue.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='vendors/jquery-3.1.1.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='vendors/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='vendors/axios.min.js') }}"></script>
+    <script src="{{ static('vendors/vue/vue.js') }}"></script>
+    <script src="{{ static('vendors/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ static('vendors/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ static('vendors/axios/axios.min.js') }}"></script>
     {% block footer_js %}{% endblock %}
 </body>
 </html>
