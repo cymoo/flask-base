@@ -3,6 +3,7 @@ App factory
 """
 
 from flask import Flask, send_from_directory
+from .utils.helper import static
 
 
 def create_app(config, static_folder='static', template_folder='templates'):
@@ -29,8 +30,7 @@ def register_blueprints(app):
 
 
 def register_template_env(app):
-    # app.jinja_env.globals['moment'] = None
-    pass
+    app.jinja_env.globals['static'] = static
 
 
 def register_template_filters(app):

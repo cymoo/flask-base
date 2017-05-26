@@ -12,7 +12,9 @@ class Config:
 class DevelopmentConfig(Config):
     EXPLAIN_TEMPLATE_LOADING = False
     DEBUG = True
-    DATABASE_URI = None
+    DATABASE_URI = 'mongodb://127.0.0.1:27017/foo'
+    # SQLALCHEMY_TRACK_MODIFICATIONS = True
+    # SQLALCHEMY_DATABASE_URI = 'mysql://root:xxxxxx@localhost/foo'
     PROFILE_PATH = None
 
 
