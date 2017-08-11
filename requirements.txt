@@ -1,5 +1,8 @@
+# uwsgi
+gunicorn
+setproctitle
+
 flask
-uwsgi
 
 # for MySQL
 -----

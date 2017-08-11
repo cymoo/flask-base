@@ -12,6 +12,7 @@ def create_app(config, static_folder='static', template_folder='templates'):
 
     register_extensions(app)
     register_blueprints(app)
+    register_template_config(app)
     register_template_env(app)
     register_template_filters(app)
     register_before_handlers(app)
@@ -27,6 +28,17 @@ def register_extensions(app):
 def register_blueprints(app):
     from .views import main
     app.register_blueprint(main)
+
+
+def register_template_config(app):
+    # If this is set to True the first newline after a block is removed
+    # (block, not variable tag!).
+    app.jinja_env.trim_blocks = False
+    # If this is set to True leading spaces and tabs are stripped from
+    # the start of a line to a block. Defaults to False.
+    app.jinja_env.lstrip_blocks = False
+    app.jinja_env.variable_start_string = '{{'
+    app.jinja_env.variable_end_string = '}}'
 
 
 def register_template_env(app):
@@ -67,3 +79,11 @@ def register_error_handler(app):
     @app.errorhandler(500)
     def internal_server_error(error):
         return send_from_directory(app.config['STATIC_PAGE_FOLDER'], '500.html'), 500
+
+
+def register_uploads(app):
+    @app.route('/uploads/<path:filepath>')
+    def download_file(filepath):
+        return send_from_directory(app.config['UPLOAD_FOLDER'], filepath)
+
+    # upload file

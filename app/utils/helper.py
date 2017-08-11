@@ -1,24 +1,20 @@
 import os
 import re
 import random
+from functools import wraps
 import arrow
-from flask import url_for
+from flask import url_for, request, abort
 from jinja2 import Markup
 import string
 
-__all__ = [
-    'Moment',
-    'unique_filename',
-    'class_property'
-]
 
 # characters that not belong to 汉字 or digits or alphabet or `-`
-# will deemed as illegal 
+# will deemed as illegal
 illegal_char = re.compile(r'[^\u4e00-\u9fa5\w\-]+')
 
 
-def static(filename):
-    return url_for('static', filename=filename)
+def static(filename, **kw):
+    return url_for('static', filename=filename, **kw)
 
 
 # helper-class for utilizing moment.js in Jinja2
@@ -68,7 +64,7 @@ def unique_filename(filename=None, ext='', prefix='',
     return basename_no_ext + ext
 
 
-# implement a simple getter for class method
+# a simple getter for class method
 class ClassProperty:
     def __init__(self, func):
         self.__doc__ = func.__doc__
@@ -81,3 +77,26 @@ class ClassProperty:
 
 # alias for ClassProperty
 class_property = ClassProperty
+
+
+def require_params(*args):
+    def wrapper(func):
+        @wraps(func)
+        def inner():
+            if 'json' in request.content_type:
+                data = [request.get_json()]
+            elif 'form-data' in request.content_type:
+                data = [request.form, request.files]
+            else:
+                data = [request.values]
+            for k in args:
+                for d in data:
+                    v = d.get(k, None)
+                    if v is not None:
+                        break
+                else:
+                    abort(400)
+            return func()
+        return inner
+    return wrapper
+

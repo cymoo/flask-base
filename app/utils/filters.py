@@ -23,17 +23,17 @@ def get_day(dt):
     return arrow.get(dt).day
 
 
-def get_dt_string(dt):
+def formatted_time(dt):
     return arrow.get(dt).format('YYYY-MM-DD')
 
 
-def do_truncate(s, length=255, end='...'):
+def truncated_string(s, length=255, end='...'):
     if not isinstance(s, str):
         s = s.decode('utf-8')
     if len(s) <= length:
         return s
 
-    result = s[:length-len(end)].rsplit(' ', 1)[0]
+    result = s[:length - len(end)].rsplit(' ', 1)[0]
     if len(result) < length:
         result += ''
     return result + end
