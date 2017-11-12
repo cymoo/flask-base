@@ -1,14 +1,15 @@
 """
-App factory
+Application factory
+~~~~~~~~~~~~~~~~~~~
 """
 
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, render_template
 from .utils.helper import static
 
 
 def create_app(config, static_folder='static', template_folder='templates'):
     app = Flask(__name__, static_folder=static_folder, template_folder=template_folder)
-    app.config.from_object(config['default'])
+    app.config.from_object(config)
 
     register_extensions(app)
     register_blueprints(app)
@@ -51,18 +52,10 @@ def register_template_filters(app):
 
 
 def register_before_handlers(app):
-
-    # @app.before_request
-    # def foo():
-    #     pass
     pass
 
 
 def register_teardown_handlers(app):
-
-    # @app.teardown_request
-    # def foo():
-    #     pass
     pass
 
 
@@ -70,20 +63,18 @@ def register_error_handler(app):
 
     @app.errorhandler(403)
     def forbidden_page(error):
-        return send_from_directory(app.config['STATIC_PAGE_FOLDER'], '403.html'), 403
+        return render_template('error/403.html'), 403
 
     @app.errorhandler(404)
     def page_not_found(error):
-        return send_from_directory(app.config['STATIC_PAGE_FOLDER'], '404.html'), 404
+        return render_template('error/404.html'), 404
 
     @app.errorhandler(500)
     def internal_server_error(error):
-        return send_from_directory(app.config['STATIC_PAGE_FOLDER'], '500.html'), 500
+        return render_template('error/500.html'), 500
 
 
 def register_uploads(app):
     @app.route('/uploads/<path:filepath>')
-    def download_file(filepath):
+    def uploaded(filepath):
         return send_from_directory(app.config['UPLOAD_FOLDER'], filepath)
-
-    # upload file

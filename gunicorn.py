@@ -1,9 +1,10 @@
 """
-Some common settings for gunicorn.
+Most used settings for gunicorn.
 For details see: http://docs.gunicorn.org/en/latest/settings.html#settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 """
 import multiprocessing
+import os
 
 # Server Socket
 # ~~~~~~~~~~~~~
@@ -15,7 +16,7 @@ bind = '127.0.0.1:5000'
 # Exceeding this number results in the client getting an error when
 # attempting to connect. It should only affect servers under significant load.
 # Generally set in the 64-2048
-backlog = '2048'
+backlog = 2048
 
 # Worker Processes
 # ~~~~~~~~~~~~~~~~
@@ -84,7 +85,7 @@ limit_request_field_size = 8190
 # The default behavior is to attempt inotify with a fallback to file system polling.
 # Generally, inotify should be preferred if available because it consumes less system resources.
 # In order to use the inotify reloader, you must have the inotify package installed.
-# FIXME: error hanppens when using inotity?
+# FIXME: error happens when using inotify?
 reload = True
 
 # Extends reload option to also watch and reload on additional files
@@ -120,10 +121,10 @@ forwarded_allow_ips = '127.0.0.1'
 
 # The Error log file to write to.
 # Using '-' for FILE makes gunicorn log to stderr. Log to stderr by default..
-# errorlog = '/path/to/.../file'
+# errorlog = '/Users/cymoo/Desktop/error.log'
 
 # Valid level names are: debug, info, warning, error, critical
-# loglevel = 'error'
+loglevel = 'error'
 
 
 # Process Naming
@@ -133,13 +134,13 @@ forwarded_allow_ips = '127.0.0.1'
 # This affects things like ps and top. If you’re going to be running more
 # than one instance of Gunicorn you’ll probably want to set a name to
 # tell them apart. This requires that you install the setproctitle module.
-proc_name = 'flask-app'
+proc_name = 'flask'
 
 # Server Mechanics
 # ~~~~~~~~~~~~~~~~
 
 # A comma-separated list of directories to add to the Python path.
-# pythonpath = '/path/to/.../dir, /path/to/.../dir2'
+# pythonpath = os.path.abspath(os.path.dirname(__file__))
 
 # Server Mechanics
 # ~~~~~~~~~~~~~~~

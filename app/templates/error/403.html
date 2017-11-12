@@ -1,0 +1,9 @@
+{% extends 'error/error.html' %}
+
+{% block title %}<title>{{ title if title else '403 error' }}</title>{% endblock %}
+{% block content %}
+    <h1>{{ title if title else '403' }}</h1>
+    <h2>{{ intro if intro else '抱歉，你没有权限访问此页面' }}</h2>
+    <br>
+    {{ msg if msg else '<a href="/">回到主页</a>' | safe }}
+{% endblock %}

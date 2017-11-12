@@ -77,26 +77,3 @@ class ClassProperty:
 
 # alias for ClassProperty
 class_property = ClassProperty
-
-
-def require_params(*args):
-    def wrapper(func):
-        @wraps(func)
-        def inner():
-            if 'json' in request.content_type:
-                data = [request.get_json()]
-            elif 'form-data' in request.content_type:
-                data = [request.form, request.files]
-            else:
-                data = [request.values]
-            for k in args:
-                for d in data:
-                    v = d.get(k, None)
-                    if v is not None:
-                        break
-                else:
-                    abort(400)
-            return func()
-        return inner
-    return wrapper
-

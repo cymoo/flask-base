@@ -1,26 +1,12 @@
-# uwsgi
 gunicorn
 setproctitle
-
 flask
-
-# for MySQL
------
-mysqlclient
-SQLAlchemy
-alembic
-flask-migrate
------
-# for MongoDB
------
 pymongo
 mongoengine
-blinker
------
 redis
+requests
 gevent
 arrow
 pillow
 flask-admin
-flask-login
 flask-script

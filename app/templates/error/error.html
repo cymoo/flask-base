@@ -5,10 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit" />
-    <meta name="Author" content="Cymoo">
-    <meta name="Description" content="...">
-    <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
-    <title>服务器错误</title>
+    <link rel="shortcut icon" href="{{ static('img/favicon.ico') }}" type="image/x-icon">
+    {% block title %}{% endblock %}
     <style>
         body {
             padding: 0 !important;
@@ -41,15 +39,23 @@
             font-weight: 300;
             line-height: 1.1;
         }
-        .page-content p {
+        .page-content a {
+            display: inline-block;
             margin-top: 25px;
-            font-size: 15px;
+            padding: 10px 15px;
+            font-size: 16px;
             font-weight: 300;
-            color: #555;
-        }
-        .page-content p a {
-            color: rgba(0, 171, 107, 0.76);
+            color: #00ab6b;
+            background-color: #fff;
+            border: 1px solid #00ab6b;
+            border-radius: 21px;
             text-decoration: none;
+            transition: all 0.5s ease-in-out
+        }
+        .page-content a:hover {
+            color: #fff;
+            border-color: #fff;
+            background-color: #00ab6b;
         }
     </style>
 </head>
@@ -57,10 +63,8 @@
 <body>
     <div class="error-page">
         <div class="page-content">
-            <h1>500</h1>
-            <h2>服务器君打瞌睡啦zzz</h2>
-            <br>
-            <p>尝试刷新页面, 或者联系<a href="mailto:milkywayjc@hotmail.com">管理员</a></p>
+            {% block content %}
+            {% endblock %}
         </div>
     </div>
 </body>

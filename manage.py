@@ -1,6 +1,6 @@
 import gevent.monkey; gevent.monkey.patch_all()
 from flask_script import Manager
-from wsgi import app
+from wsgi import flask_app as app
 
 manager = Manager(app)
 
