@@ -14,10 +14,6 @@
     <link rel="stylesheet" href="{{ static('vendors/animate.css') }}">
     {% block css %}{% endblock %}
     <link rel="stylesheet" href="{{ static('css/style.css') }}">
-    <!--[if lt IE 9]>
-		<script src="{{ static('vendors/respond.min.js') }}"></script>
-		<script src="{{ static('vendors/html5shiv.min.js') }}"></script>
-    <![endif]-->
     {% block header_js %}{% endblock %}
     {% block title %}<title>首页</title>{% endblock %}
 </head>
@@ -26,7 +22,7 @@
     {% block content %}{% endblock %}
     {% block footer %}{% endblock %}
     <script src="{{ static('vendors/vue/vue.js') }}"></script>
-    <script src="{{ static('vendors/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ static('vendors/jquery.min.js') }}"></script>
     <script src="{{ static('vendors/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ static('vendors/axios/axios.min.js') }}"></script>
     {% block footer_js %}{% endblock %}

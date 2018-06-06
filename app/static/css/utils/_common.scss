@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+/* Fixed Top */
+@include add-media-query-for('.fixed-top') {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: $zindex-fixed;
+}
+
+/* Fixed Bottom */
+@include add-media-query-for('.fixed-bottom') {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: $zindex-fixed
+}
+
+/* Absolute Centered: 使用absolute与transform */
+// TODO: center-x and center-y is not necessary
+@each $breakpoint in $breakpoints {
+  @include media-breakpoint-up($breakpoint) {
+    $suffix: breakpoint-suffix($breakpoint);
+    @each $direction in ('', '-x', '-y') {
+      .g-abs-centered#{$direction}#{$suffix} {
+        @if $direction == '-x' {
+          @include gen-abs-centered(50%, null);
+        } @else if $direction == '-y' {
+          @include gen-abs-centered(null, 50%);
+        } @else {
+          @include gen-abs-centered(50%, 50%);
+        }
+      }
+    }
+  }
+}
+
+/* Relative Centered */
+// TODO: 测试其与absolute centered的区别
+.g-rel-centered {
+  position: relative;
+  top: 50% !important;
+  left: 50% !important;
+  @include vendor-prefix(transform, translate(-50%, -50%))
+}
+
+.g-rel-centered-x {
+  position: relative;
+  left: 50% !important;
+  @include vendor-prefix(transform, translate(-50%, -50%))
+}
+
+.g-rel-centered-y {
+  position: relative;
+  top: 50% !important;
+  @include vendor-prefix(transform, translate(-50%, -50%))
+}
+
+/* Flex Centered */
+@include add-media-query-for('.g-flex-centered') {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

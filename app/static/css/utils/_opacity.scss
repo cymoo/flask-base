@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+/*------------------------------------
+  Opacity
+------------------------------------*/
+
+@each $opacity in $opacity-values {
+  .g-parent:hover .g-opacity-#{g-str-replace($opacity, '.', '_')}--parent-hover,
+  .g-opacity-#{g-str-replace($opacity, '.', '_')}--hover:hover,
+  .g-opacity-#{g-str-replace($opacity, '.', '_')} {
+    opacity: $opacity !important;
+  }
+}

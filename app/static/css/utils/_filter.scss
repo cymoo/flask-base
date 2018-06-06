@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+/*------------------------------------
+  Filter
+------------------------------------*/
+
+/* TODO: 根据需要添加其他滤镜效果，比如brightness, contrast, greyscale, invert等 */
+/* 高斯模糊：以多少像素融合在一起，只接受长度值 */
+@each $value in $blur-values {
+  .g-blur-#{$value}--hover:hover,
+  .g-parent:hover, .g-blur-#{$value}--parent-hover,
+  .g-blur-#{$value} {
+    -webkit-filter: blur(#{$value}px);
+            filter: blur(#{$value}px);
+  }
+}

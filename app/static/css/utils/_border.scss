@@ -1,0 +1,93 @@
+@charset "UTF-8";
+
+/*------------------------------------
+  Border
+------------------------------------*/
+
+$border-styles: (solid, dashed, dotted);
+
+/* Border None */
+@include add-media-query-for('.g-brd-none') {border: none !important;}
+
+/* Border Width: 1px */
+@each $breakpoint in $breakpoints {
+  @include media-breakpoint-up($breakpoint) {
+    $suffix: breakpoint-suffix($breakpoint);
+    @each $style in join($border-styles, none) {
+      @each $side in (x, y, around, top, right, bottom, left) {
+        .g-brd-#{$side}-#{$style}#{$suffix} {
+          @if $side == x {
+            @if $style == none {
+              border-left: none !important;
+              border-right: none !important;
+            } @else {
+              border-left: 1px #{$style} transparent !important;
+              border-right: 1px #{$style} transparent !important;
+            }
+          } @else if $side == y {
+            @if $style == none {
+              border-top: none !important;
+              border-bottom: none !important;
+            } @else {
+              border-top: 1px #{$style} transparent !important;
+              border-bottom: 1px #{$style} transparent !important;
+            }
+          } @else if $side == around {
+            @if $style == none {
+              border: none !important;
+            } @else {
+              border: 1px #{$style} transparent !important;
+            }
+          } @else {
+            @if $style == none {
+              border-#{$side}: none !important;
+            } @else {
+              border-#{$side}: 1px #{$style} transparent !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Border Style */
+@each $style in $border-styles {
+  .g-brd-#{$style} { border-style: $style !important; }
+}
+
+/* Border Radius */
+.g-rounded-50x { border-radius: 50% !important; }
+
+@each $breakpoint in $breakpoints {
+  @include media-breakpoint-up($breakpoint) {
+    $suffix: breakpoint-suffix($breakpoint);
+    @each $radius in $border-radius {
+      .g-rounded-#{$radius}#{$suffix} { border-radius: g-add-unit($radius, px) !important; }
+    }
+  }
+}
+
+/* Border Color */
+@each $breakpoint in $breakpoints {
+  @include media-breakpoint-up($breakpoint) {
+    $suffix: breakpoint-suffix($breakpoint);
+    @each $name, $color in $border-colors {
+      @each $side in (x, y, around, top, right, bottom, left) {
+        .g-brd-#{$side}-color-#{$name}#{$suffix} {
+          @if $side == x {
+            border-left-color: $color !important;
+            border-right-color: $color !important;
+          } @else if $side == y {
+            border-top-color: $color !important;
+            border-bottom-color: $color !important;
+          } @else if $side == around {
+            border-color: $color !important;
+          } @else {
+            border-#{$side}-color: $color !important;
+          }
+        }
+      }
+    }
+  }
+}

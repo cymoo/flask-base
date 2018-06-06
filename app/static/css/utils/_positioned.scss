@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+/*------------------------------------
+  Positioned: top, bottom, right, left
+------------------------------------*/
+
+@each $breakpoint in $breakpoints {
+  @include media-breakpoint-up($breakpoint) {
+    $suffix: breakpoint-suffix($breakpoint);
+    @each $direction in (top, left, bottom, right) {
+      @each $value in $pos-values {
+        $value-str: #{g-str-replace(g-str-replace($value, '.', '_'), '%', 'x')};
+        .g-#{$direction}-#{$value-str}#{$suffix} {
+          #{$direction}: g-add-unit($value);
+        }
+        // 防止出现minus-0
+        @if $value != 0 {
+          .g-#{$direction}-minus-#{$value-str}#{$suffix} {
+            #{$direction}: g-add-unit(-$value);
+          }
+        }
+      }
+    }
+  }
+}

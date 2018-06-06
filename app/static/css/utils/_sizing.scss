@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+/*------------------------------------
+  Width
+------------------------------------*/
+
+@include add-media-query-for('.g-width-auto') { width: auto !important; }
+
+@each $breakpoint in $breakpoints {
+  @include media-breakpoint-up($breakpoint) {
+    $suffix: breakpoint-suffix($breakpoint);
+    @each $value in $width-values {
+      .g-width-#{g-str-replace(g-str-replace($value, '.', '_'), '%', 'x')}#{$suffix} {
+        width: g-add-unit($value, px) !important;
+      }
+    }
+  }
+}
+
+/*------------------------------------
+  Max Width
+------------------------------------*/
+
+@include add-media-query-for('.g-max-width-none') { max-width: none !important; }
+
+@each $breakpoint in $breakpoints {
+  @include media-breakpoint-up($breakpoint) {
+    $suffix: breakpoint-suffix($breakpoint);
+    @each $value in $max-width-values {
+      .g-max-width-#{g-str-replace(g-str-replace($value, '.', '_'), '%', 'x')}#{$suffix} {
+        max-width: g-add-unit($value, px) !important;
+      }
+    }
+  }
+}
+
+/*------------------------------------
+  Min Width
+------------------------------------*/
+
+@each $breakpoint in $breakpoints {
+  @include media-breakpoint-up($breakpoint) {
+    $suffix: breakpoint-suffix($breakpoint);
+    @each $value in $min-width-values {
+      .g-min-width-#{g-str-replace(g-str-replace($value, '.', '_'), '%', 'x')}#{$suffix} {
+        min-width: g-add-unit($value, px) !important;
+      }
+    }
+  }
+}
+
+/*------------------------------------
+  Height
+------------------------------------*/
+
+@include add-media-query-for('.g-height-auto') { height: auto !important; }
+
+@each $breakpoint in $breakpoints {
+  @include media-breakpoint-up($breakpoint) {
+    $suffix: breakpoint-suffix($breakpoint);
+    @each $value in $height-values {
+      .g-height-#{g-str-replace(g-str-replace($value, '.', '_'), '%', 'x')}#{$suffix} {
+        height: g-add-unit($value) !important;
+      }
+    }
+  }
+}
+
+/*------------------------------------
+  Max Height
+------------------------------------*/
+
+@include add-media-query-for('.g-max-height-none') { max-height: none !important; }
+
+@each $breakpoint in $breakpoints {
+  @include media-breakpoint-up($breakpoint) {
+    $suffix: breakpoint-suffix($breakpoint);
+    @each $value in $max-height-values {
+      .g-max-height-#{g-str-replace(g-str-replace($value, '.', '_'), '%', 'x')}#{$suffix} {
+        max-height: g-add-unit($value, px) !important;
+      }
+    }
+  }
+}
+/*------------------------------------
+  Min Height
+------------------------------------*/
+
+@each $breakpoint in $breakpoints {
+  @include media-breakpoint-up($breakpoint) {
+    $suffix: breakpoint-suffix($breakpoint);
+    @each $value in $min-height-values {
+      .g-min-height-#{g-str-replace(g-str-replace($value, '.', '_'), '%', 'x')}#{$suffix} {
+        min-height: g-add-unit($value, px) !important;
+      }
+    }
+  }
+}

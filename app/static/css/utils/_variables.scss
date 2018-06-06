@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+// *****************************************
+// Variables used to generate helper classes
+//******************************************
+
+$breakpoints:         map_keys($grid-breakpoints);
+
+// Text
+$min-font-size:       10;
+$max-font-size:       40;
+$font-weights:        (200 300 400 500 600 700 800 900);
+$letter-spacings:     (1 2 3 4 5 6 7 8 9 10 11 12 13 14);
+$line-heights:        (1 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2);
+
+// Colors ( NOTE: remove unnecessary colors in production code )
+$bg-colors:           $colors;
+$font-colors:         $colors;
+$border-colors:       $colors;
+$placeholder-colors:  ('white': #fff, 'inherit': inherit);
+
+// Spacing
+$margin-values:       (0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 25 30 35 40 45 50 55 60 65 70 75 80 85 90 95 100 -5 -15 -30);
+$padding-values:      (0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 25 30 35 40 45 50 55 60 65 70 75 80 85 90 95 100);
+
+// Sizing
+$width-values:        (5 10 15 20 25 30 36 48 50 100 120 10% 12.5% 20% 25% 30% 40% 50% 60% 70% 75% 80% 90% 100%);
+$max-width-values:    (450 640 800 1000 100%);
+$min-width-values:    (640 800 1000 100%);
+
+$height-values:       (5 10 15 20 25 30 36 48 50 100 120 10% 12.5% 20% 25% 30% 40% 50% 60% 70% 75% 80% 90% 100%);
+$max-height-values:   (300 100%);
+$min-height-values:   (300 100%);
+
+// Border
+$border-radius:          (0 1 2 3 4 5 6 7 8 9 10 15 20 25 30 50 100);
+
+// Positioned: top, bottom, left, right
+$pos-values:          (0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 20 25 30 35 40 45 50 75 100 5% 10% 12.5% 15% 20% 25% 30% 35% 40% 45% 50% 75% 100%);
+
+// Cursor Style
+$cursor-styles:       (auto, crosshair, pointer, move, text, help);
+
+// Opacity
+$opacity-values:      (0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1);
+
+// Display Style
+$display-styles:      (none, inline, block, inline-block, table, table-row, table-cell, flex, inline-flex);
+
+// Z-Index
+$z-indexes:           (1 2 3 4 5 99 9999);
+
+// Blur: 高斯模糊半径
+$blur-values:         (3, 5, 15, 20, 25, 30);
+
+
+// Transition
+$transition-durations:(0 0.2 0.3 0.4 0.5 0.6 1);
+$transition-delays:   (0.2 0.3 0.4 0.5 1);
+// 更多过渡函数参考：http://easings.net/zh-cn
+$transition-funcs:    (ease-in, ease-out, ease-in-out, linear);
+
+// Other variables
+$zindex-fixed:        999;

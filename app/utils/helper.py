@@ -1,23 +1,91 @@
 import os
 import re
 import random
-from functools import wraps
+import time
+import hashlib
+from functools import wraps, partial
 import arrow
-from flask import url_for, request, abort
+from contextlib import contextmanager
+from flask import url_for, request, abort, current_app as app
 from jinja2 import Markup
 import string
+from numbers import Number
+
+# characters that not belong to 汉字 or digits or alphabet or `-` will be deemed as illegal
+ILLEGAL_CHAR = re.compile(r'[^\u4e00-\u9fa5\w\-]+')
 
 
-# characters that not belong to 汉字 or digits or alphabet or `-`
-# will deemed as illegal
-illegal_char = re.compile(r'[^\u4e00-\u9fa5\w\-]+')
+# used for simple profile
+@contextmanager
+def timeit(label='time consumed', precision=6):
+    start = time.time()
+    try:
+        yield
+    finally:
+        end = time.time()
+        fmt = '{}: {:.' + str(precision) + 'f}s'
+        print(fmt.format(label, end - start))
 
 
+# a shortcut to url_for('static', filename='', **kw)
 def static(filename, **kw):
     return url_for('static', filename=filename, **kw)
 
 
-# helper-class for utilizing moment.js in Jinja2
+def random_string(length=10, type='all'):
+    choices = {
+        'digit': string.digits,
+        'letter': string.ascii_letters,
+        'uppercase': string.ascii_uppercase,
+        'lowercase': string.ascii_lowercase,
+        'all': string.digits + string.ascii_letters
+    }
+    return ''.join(random.choice(choices[type]) for _ in range(length))
+
+
+random_digits = partial(random_string, type='digit')
+random_letters = partial(random_string, type='letter')
+random_upper_letters = partial(random_string, type='uppercase')
+random_lower_letters = partial(random_string, type='lowercase')
+
+
+# a simple solution to generate unique filename
+def unique_filename(filename='', ext='', prefix='', suffix='', separator='-'):
+    if filename:
+        basename, ext = os.path.splitext(filename)
+        basename = ILLEGAL_CHAR.sub('', basename)
+    else:
+        basename = ''
+    unique_name = separator.join(filter(lambda x: x != '', [
+        prefix,
+        basename,
+        arrow.now().format('YYYYMMDDHHmmss'),
+        random_string(),
+        suffix
+    ]))
+
+    if ext and not ext.startswith('.'):
+        ext = '.' + ext
+    return unique_name + ext
+
+
+# a very simple solution to generate hashed password
+def gen_hash_password(password, salt=''):
+    if salt == '':
+        salt = app.config['SECRET_KEY']
+    m = hashlib.sha1()
+    m.update(password.encode('utf-8'))
+    m.update(salt.encode('utf-8'))
+    return m.hexdigest()
+
+
+def verify_password(password, hash_password, salt=''):
+    if salt == '':
+        salt = app.config['SECRET_KEY']
+    return gen_hash_password(password, salt) == hash_password
+
+
+# a helper-class for utilizing moment.js in Jinja2
 class Moment(object):
     def __init__(self, timestamp):
         self.timestamp = timestamp
@@ -40,40 +108,5 @@ class Moment(object):
         return Markup("<script>moment.locale(\"%s\");</script>" % args)
 
 
-def random_string(length=5):
-    choices = string.ascii_letters + string.digits
-    chars = [random.choice(choices) for _ in range(length)]
-    return ''.join(chars)
-
-
-# a very simple solution to avoid same filename
-def unique_filename(filename=None, ext='', prefix='',
-                    suffix='', separator='-'):
-    if filename:
-        fname, _ext = os.path.splitext(filename)
-        fname = illegal_char.sub('', fname)
-    else:
-        fname, _ext = '', ''
-    dt_string = arrow.now().format('YYYYMMDDHHmmss')
-    _list = [prefix, fname, dt_string, random_string(), suffix]
-    basename_no_ext = separator.join([item for item in _list if item])
-    ext = ext if ext else _ext
-    if ext:
-        ext = ext if ext.startswith('.') else '.' + ext
-
-    return basename_no_ext + ext
-
-
-# a simple getter for class method
-class ClassProperty:
-    def __init__(self, func):
-        self.__doc__ = func.__doc__
-        self.__name__ = func.__name__
-        self._func = func
-
-    def __get__(self, instance, owner):
-        return self._func(owner)
-
-
-# alias for ClassProperty
-class_property = ClassProperty
+if __name__ == '__main__':
+    pass

@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+/*------------------------------------
+  Flex
+------------------------------------*/
+
+@each $breakpoint in $breakpoints {
+  @include media-breakpoint-up($breakpoint) {
+    $suffix: breakpoint-suffix($breakpoint);
+    .g-flex-row#{$suffix}                 { flex-direction: row !important; }
+    .g-flex-column#{$suffix}              { flex-direction: column !important; }
+    .g-flex-row-reverse#{$suffix}         { flex-direction: row-reverse !important; }
+    .g-flex-column-reverse#{$suffix}      { flex-direction: column-reverse !important; }
+
+    .g-flex-wrap#{$suffix}                { flex-wrap: wrap !important; }
+    .g-flex-nowrap#{$suffix}              { flex-wrap: nowrap !important; }
+    .g-flex-wrap-reverse#{$suffix}        { flex-wrap: wrap-reverse !important; }
+    .g-flex-fill#{$suffix}                { flex: 1 1 auto !important; }
+
+    .g-justify-content-start#{$suffix}    { justify-content: flex-start !important; }
+    .g-justify-content-end#{$suffix}      { justify-content: flex-end !important; }
+    .g-justify-content-center#{$suffix}   { justify-content: center !important; }
+    .g-justify-content-between#{$suffix}  { justify-content: space-between !important; }
+    .g-justify-content-around#{$suffix}   { justify-content: space-around !important; }
+
+    .g-align-items-start#{$suffix}        { align-items: flex-start !important; }
+    .g-align-items-end#{$suffix}          { align-items: flex-end !important; }
+    .g-align-items-center#{$suffix}       { align-items: center !important; }
+    .g-align-items-baseline#{$suffix}     { align-items: baseline !important; }
+    .g-align-items-stretch#{$suffix}      { align-items: stretch !important; }
+
+    .g-align-content-start#{$suffix}      { align-content: flex-start !important; }
+    .g-align-content-end#{$suffix}        { align-content: flex-end !important; }
+    .g-align-content-center#{$suffix}     { align-content: center !important; }
+    .g-align-content-between#{$suffix}    { align-content: space-between !important; }
+    .g-align-content-around#{$suffix}     { align-content: space-around !important; }
+    .g-align-content-stretch#{$suffix}    { align-content: stretch !important; }
+
+    .g-align-self-auto#{$suffix}          { align-self: auto !important; }
+    .g-align-self-start#{$suffix}         { align-self: flex-start !important; }
+    .g-align-self-end#{$suffix}           { align-self: flex-end !important; }
+    .g-align-self-center#{$suffix}        { align-self: center !important; }
+    .g-align-self-baseline#{$suffix}      { align-self: baseline !important; }
+    .g-align-self-stretch#{$suffix}       { align-self: stretch !important; }
+  }
+}

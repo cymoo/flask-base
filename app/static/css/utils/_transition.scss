@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+/*------------------------------------
+  Transitions
+------------------------------------*/
+
+// NOTE: learn more details, see: https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Transitions/Using_CSS_transitions
+// NOTE: Use the other timing function, refer to: http://easings.net/zh-cn
+// TODO: 待测试此过渡效果
+[class*="g-transition"],
+[class*="g-transition"]::before,
+[class*="g-transition"]::after {
+  transition-property: all;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+}
+
+/* Duration */
+@each $duration in $transition-durations {
+  .g-transition-#{g-str-replace($duration, '.', '_')},
+  .g-transition-#{g-str-replace($duration, '.', '_')}::before,
+  .g-transition-#{g-str-replace($duration, '.', '_')}::after {
+    transition-duration: $duration * 1s;
+  }
+}
+
+/* Delay */
+@each $delay in $transition-delays {
+  .g-transition-delay-#{g-str-replace($delay, '.', '_')},
+  .g-transition-delay-#{g-str-replace($delay, '.', '_')}::before,
+  .g-transition-delay-#{g-str-replace($delay, '.', '_')}::after {
+    transition-delay: $delay * 1s;
+  }
+}
+
+/* Timing Function */
+@each $func in $transition-funcs {
+  .g-transition-#{$func},
+  .g-transition-#{$func}::before,
+  .g-transition-#{$func}::after {
+    transition-timing-function: $func;
+  }
+}

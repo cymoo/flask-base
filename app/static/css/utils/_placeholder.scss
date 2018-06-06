@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+/*------------------------------------
+  PlaceHolder
+------------------------------------*/
+
+$placeholder-vendor-prefixes: ('::-webkit-input-placeholder', '::-moz-placeholder', ':-ms-input-placeholder', '::placeholder');
+@each $name, $value in $placeholder-colors {
+  @each $prefix in $placeholder-vendor-prefixes {
+    .g-placeholder-#{$name}#{$prefix} {
+      color: $value;
+    }
+  }
+}

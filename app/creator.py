@@ -12,6 +12,7 @@ def create_app(config, static_folder='static', template_folder='templates'):
     app.config.from_object(config)
 
     register_extensions(app)
+    register_logger_handler(app)
     register_blueprints(app)
     register_template_config(app)
     register_template_env(app)
@@ -23,7 +24,19 @@ def create_app(config, static_folder='static', template_folder='templates'):
 
 
 def register_extensions(app):
+    # import redis
+    # rd = redis.StrictRedis(decode_responses=True)
+    # app.rd = rd
     pass
+
+
+def register_logger_handler(app):
+    import logging
+    handler = logging.FileHandler(filename=app.config['LOG_FILE'])
+    handler.setLevel(logging.WARNING)
+    formatter = logging.Formatter(app.config['LOG_FORMAT'], style='{')
+    handler.setFormatter(formatter)
+    app.logger.addHandler(handler)
 
 
 def register_blueprints(app):
@@ -47,8 +60,7 @@ def register_template_env(app):
 
 
 def register_template_filters(app):
-    # app.jinja_env.filters['truncate'] = None
-    pass
+    app.jinja_env.filters['repr'] = repr
 
 
 def register_before_handlers(app):
@@ -72,9 +84,3 @@ def register_error_handler(app):
     @app.errorhandler(500)
     def internal_server_error(error):
         return render_template('error/500.html'), 500
-
-
-def register_uploads(app):
-    @app.route('/uploads/<path:filepath>')
-    def uploaded(filepath):
-        return send_from_directory(app.config['UPLOAD_FOLDER'], filepath)

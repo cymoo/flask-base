@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+/*------------------------------------
+  Special Styles
+------------------------------------*/
+// tmp
+.table td, .table th {
+  vertical-align: middle;
+}
+
+[contenteditable=true] {
+  //color: g-color('red');
+  background-color: #e2b8bb;
+  //font-style: italic;
+  outline: none;
+  &:focus {
+    outline: none;
+
+  }
+}

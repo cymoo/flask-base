@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: $font-family;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: $line-height-base;
+  color: $body-color;
+  background-color: #fff;
+  // TODO: 弄清楚以下属性的具体效果
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -moz-font-feature-settings: "liga", "kern";
+  text-rendering: optimizelegibility;
+}
+
+a {
+  color: $link-color;
+  text-decoration: $link-decoration;
+  transition: $transition-base;
+
+  &:focus,
+  &:hover {
+    color: $link-hover-color;
+    text-decoration: $link-hover-decoration;
+    transition: $transition-base;
+  }
+}
+
+/*------------------------------------
+  Highlight Color
+------------------------------------*/
+::-moz-selection {
+  color: $selection-color;
+  background-color: $selection-bg-color;
+}
+
+::selection {
+  color: $selection-color;
+  background-color: $selection-bg-color;
+}
+

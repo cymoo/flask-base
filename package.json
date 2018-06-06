@@ -1,7 +1,7 @@
 {
-  "name": "cymoo-favo",
+  "name": "foo",
   "version": "0.0.1",
-  "description": "common front-end modules",
+  "description": "foo bar",
   "main": "index.js",
   "directories": {
     "test": "tests"
@@ -16,17 +16,14 @@
     "axios": "*",
     "bootstrap": "*",
     "font-awesome": "*",
-    "html5shiv": "*",
     "jquery": "*",
-    "respond.js": "*",
     "sweetalert2": "*",
-    "dropzone": "*",
-    "slick": "*",
     "toastr": "*",
     "summernote": "*",
     "vue": "*"
   },
-    "devDependencies": {
+  "devDependencies": {
+    "browserify": "",
     "color": "*",
     "eslint": "*",
     "eslint-plugin-html": "*",

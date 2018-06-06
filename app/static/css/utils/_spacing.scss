@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+/*------------------------------------
+  Margin
+------------------------------------*/
+
+/* Margin Auto */
+@include add-media-query-for(('.g-ml-auto','.g-mx-auto')) {
+  margin-left: auto;
+}
+@include add-media-query-for(('.g-mr-auto','.g-mx-auto')) {
+  margin-right: auto;
+}
+
+@each $breakpoint in $breakpoints {
+  @include media-breakpoint-up($breakpoint) {
+    $suffix: breakpoint-suffix($breakpoint);
+    @each $side in (t, b, r, l) {
+      @each $value in $margin-values {
+        $v: g-add-unit($value);
+        $sign: if($value >= 0, '', 'minus');
+        @if $side == t {
+          .g-ma-#{$sign}#{$value}#{$suffix},
+          .g-my-#{$sign}#{$value}#{$suffix},
+          .g-mt-#{$sign}#{$value}#{$suffix} {
+            margin-top: $v !important;
+          }
+        } @else if $side == b {
+          .g-ma-#{$sign}#{$value}#{$suffix},
+          .g-my-#{$sign}#{$value}#{$suffix},
+          .g-mb-#{$sign}#{$value}#{$suffix} {
+            margin-bottom: $v !important;
+          }
+        } @else if $side == r {
+          .g-ma-#{$sign}#{$value}#{$suffix},
+          .g-mx-#{$sign}#{$value}#{$suffix},
+          .g-mr-#{$sign}#{$value}#{$suffix} {
+            margin-right: $v !important;
+          }
+        } @else if $side == l {
+          .g-ma-#{$sign}#{$value}#{$suffix},
+          .g-mx-#{$sign}#{$value}#{$suffix},
+          .g-ml-#{$sign}#{$value}#{$suffix} {
+            margin-left: $v !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*------------------------------------
+  Padding
+------------------------------------*/
+
+@each $breakpoint in $breakpoints {
+  @include media-breakpoint-up($breakpoint) {
+    $suffix: breakpoint-suffix($breakpoint);
+    @each $side in (t, b, r, l) {
+      @each $value in $padding-values {
+        $v: g-add-unit($value);
+        @if $side == t {
+          .g-pa-#{$value}#{$suffix},
+          .g-py-#{$value}#{$suffix},
+          .g-pt-#{$value}#{$suffix} {
+            padding-top: $v !important;
+          }
+        } @else if $side == b {
+          .g-pa-#{$value}#{$suffix},
+          .g-py-#{$value}#{$suffix},
+          .g-pb-#{$value}#{$suffix} {
+            padding-bottom: $v !important;
+          }
+        } @else if $side == r {
+          .g-pa-#{$value}#{$suffix},
+          .g-px-#{$value}#{$suffix},
+          .g-pr-#{$value}#{$suffix} {
+            padding-right: $v !important;
+          }
+        } @else if $side == l {
+          .g-pa-#{$value}#{$suffix},
+          .g-px-#{$value}#{$suffix},
+          .g-pl-#{$value}#{$suffix} {
+            padding-left: $v !important;
+          }
+        }
+      }
+    }
+  }
+}
