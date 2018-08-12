@@ -38,7 +38,7 @@ def truncated_string(s, length=255, end='...'):
     return result + end
 
 
-# a very simple method to remove html tags
+# a quite simple method to remove html tags
 def strip_tags(html, limit=100, end='...'):
     if not isinstance(html, str):
         html = html.decode('utf-8')
