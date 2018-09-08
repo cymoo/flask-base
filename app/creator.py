@@ -75,12 +75,13 @@ def register_error_handler(app):
 
     @app.errorhandler(403)
     def forbidden_page(error):
-        return render_template('error/403.html'), 403
+        return render_template('error/403.html', title='403 error'), 403
 
     @app.errorhandler(404)
     def page_not_found(error):
-        return render_template('error/404.html'), 404
+        return render_template('error/404.html', title='404 error'), 404
 
     @app.errorhandler(500)
     def internal_server_error(error):
-        return render_template('error/500.html'), 500
+        return render_template('error/500.html', title='500 error'), 500
+

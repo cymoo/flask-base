@@ -1,6 +1,5 @@
 {% extends 'error/error.html' %}
 
-{% block title %}<title>{{ title if title else '500 error' }}</title>{% endblock %}
 {% block content %}
     <h1>{{ title if title else '500' }}</h1>
     <h2>{{ intro if intro else '服务器君打瞌睡啦～zZ' }}</h2>

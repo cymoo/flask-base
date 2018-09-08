@@ -1,6 +1,5 @@
 {% extends 'error/error.html' %}
 
-{% block title %}<title>{{ title if title else '404 error' }}</title>{% endblock %}
 {% block content %}
     <h1>{{ title if title else '404' }}</h1>
     <h2>{{ intro if intro else '抱歉,你想访问的页面不存在' }}</h2>
