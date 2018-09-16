@@ -1,0 +1,10 @@
+.vscode
+.idea/
+venv/
+.DS_Store
+__pycache__
+*.pyo
+*.swp
+
+/node_modules/
+/app/static/lib/
