@@ -1,13 +1,15 @@
 from threading import RLock
 from collections import abc, namedtuple
 from keyword import iskeyword
-import json
 import time
 import math
-from pymongo.collection import Collection
 from bson import ObjectId
 from flask import abort
 
+try:
+    from pymongo.collection import Collection
+except ImportError as e:
+    pass
 
 __all__ = (
     'FrozenJson',

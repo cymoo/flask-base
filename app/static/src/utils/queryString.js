@@ -1,5 +1,4 @@
-
-function queryStringToObj() {
+export function queryStringToObj() {
     let qs = (location.search.length > 0 ? location.search.substring(1): '')
     let args = {};
     let items = qs.length ? qs.split('&') : [];
@@ -20,7 +19,7 @@ function queryStringToObj() {
     return args
 }
 
-function objToQueryString(obj) {
+export function objToQueryString(obj) {
     let items = [];
     for (let k in obj) {
         if (obj.hasOwnProperty(k)) {
@@ -28,10 +27,4 @@ function objToQueryString(obj) {
         }
     }
     return items.join('&')
-}
-
-
-module.exports = {
-    'queryStringToObj': queryStringToObj,
-    'objToQueryString': objToQueryString
 }

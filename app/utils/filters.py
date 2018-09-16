@@ -27,6 +27,7 @@ def formatted_time(dt, fmt='YYYY-MM-DD'):
     return arrow.get(dt).format(fmt)
 
 
+# jinja2自带的truncate过滤器不适用于中文
 def truncated_string(s, length=255, end='...'):
     if not isinstance(s, str):
         s = s.decode('utf-8')
@@ -36,18 +37,3 @@ def truncated_string(s, length=255, end='...'):
     if len(result) < length:
         result += ''
     return result + end
-
-
-# a quite simple method to remove html tags
-def strip_tags(html, limit=100, end='...'):
-    if not isinstance(html, str):
-        html = html.decode('utf-8')
-    string = ''
-    for m in HTML_TAG.finditer(html):
-        tmp = m.group(1)
-        s = WHITE_CHAR.sub('', tmp)
-        ss = s.strip()
-        string += ss
-        if len(string) >= limit:
-            return string[:limit] + end
-    return string

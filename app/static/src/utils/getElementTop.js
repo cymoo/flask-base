@@ -1,6 +1,5 @@
-
-// 元素距离页面顶端的高度
-function getElementTop(element) {
+/* 元素距离页面顶端的高度 */
+export function getElementTop(element) {
     let actualTop = element.offsetTop
     let current = element.offsetParent
     while (current !== null) {
@@ -10,6 +9,3 @@ function getElementTop(element) {
     return actualTop
 }
 
-module.exports = {
-    'getElementTop': getElementTop
-}

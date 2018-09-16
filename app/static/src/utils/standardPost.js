@@ -1,7 +1,6 @@
-
-// 用JS模拟发起POST请求，并跳转页面
+/* 用JS模拟发起POST请求，并跳转页面 */
 // TODO: 用原生JS重写
-function standardPost(url, args) {
+export function standardPost(url, args) {
     let form = $("<form method='post'></form>")
     form.attr({ 'action': url })
     for (let arg in args) {
@@ -16,6 +15,3 @@ function standardPost(url, args) {
     form.submit()
 }
 
-module.exports = {
-    'standardPost': standardPost
-}

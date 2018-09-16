@@ -9,7 +9,7 @@
 7. <select>元素的值，就是选中的<option>元素的 value 特性的值。如果<option>元素没有 value 特性，则是<option>元素的文本值。
 8. 在表单序列化过程中，一般不包含任何按钮字段，因为结果字符串很可能是通过其他方式提交的 除此之外的其他上述规则都应该遵循。
  */
-function serializeForm(form){
+export function serializeForm(form){
         let parts = [],
             field = null,
             i,
@@ -60,6 +60,3 @@ function serializeForm(form){
         return parts.join('&')
 }
 
-module.exports = {
-    'serializeForm': serializeForm
-}

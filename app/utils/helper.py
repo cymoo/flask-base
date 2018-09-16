@@ -15,9 +15,9 @@ from numbers import Number
 ILLEGAL_CHAR = re.compile(r'[^\u4e00-\u9fa5\w\-]+')
 
 
-# used for simple profile
 @contextmanager
 def timeit(label='time consumed', precision=6):
+    """ used for simple profile """
     start = time.time()
     try:
         yield
@@ -27,8 +27,8 @@ def timeit(label='time consumed', precision=6):
         print(fmt.format(label, end - start))
 
 
-# a shortcut to url_for('static', filename='', **kw)
 def static(filename, **kw):
+    """ a shortcut to url_for('static', filename='', **kw) """
     return url_for('static', filename=filename, **kw)
 
 
@@ -49,8 +49,8 @@ random_upper_letters = partial(random_string, type='uppercase')
 random_lower_letters = partial(random_string, type='lowercase')
 
 
-# a simple solution to generate unique filename
 def unique_filename(filename='', ext='', prefix='', suffix='', separator='-'):
+    """ a simple solution to generate unique filename """
     if filename:
         basename, ext = os.path.splitext(filename)
         basename = ILLEGAL_CHAR.sub('', basename)
@@ -69,8 +69,8 @@ def unique_filename(filename='', ext='', prefix='', suffix='', separator='-'):
     return unique_name + ext
 
 
-# a very simple solution to generate hashed password
 def gen_hash_password(password, salt=''):
+    """ a very simple solution to generate hashed password """
     if salt == '':
         salt = app.config['SECRET_KEY']
     m = hashlib.sha1()
@@ -85,8 +85,8 @@ def verify_password(password, hash_password, salt=''):
     return gen_hash_password(password, salt) == hash_password
 
 
-# a helper-class for utilizing moment.js in Jinja2
 class Moment(object):
+    """ a helper-class for utilizing moment.js in Jinja2 """
     def __init__(self, timestamp):
         self.timestamp = timestamp
 

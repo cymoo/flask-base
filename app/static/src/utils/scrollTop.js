@@ -1,6 +1,5 @@
-
 /* duration: 动画持续的时间, 默认为1000ms */
-function scrollToTop(ele, duration) {
+export function scrollToTop(ele, duration) {
     const MIN_INTERVAL = 16
     if (duration === undefined) { duration = 300 }
     let currentTop = ele.scrollTop
@@ -15,9 +14,4 @@ function scrollToTop(ele, duration) {
         }
     }
     setTimeout(_scroll, MIN_INTERVAL)
-}
-
-
-module.exports = {
-    'scrollToTop': scrollToTop
 }

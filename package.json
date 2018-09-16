@@ -1,8 +1,8 @@
 {
-  "name": "foo",
+  "name": "flask-base",
   "version": "0.0.1",
-  "description": "foo bar",
-  "main": "index.js",
+  "description": "a boilerpalte for flask app",
+  "private": true,
   "directories": {
     "test": "tests"
   },

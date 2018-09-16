@@ -1,6 +1,5 @@
-
-// highlight menu-item selected
-function highlightMenu(menuSelector, paths, activeClassName='active') {
+/* highlight menu-item selected */
+export function highlightMenu(menuSelector, paths, activeClassName='active') {
     let menu = document.querySelector(menuSelector)
     if (menu) {
         let pathname = location.pathname
@@ -14,7 +13,3 @@ function highlightMenu(menuSelector, paths, activeClassName='active') {
     }
 }
 
-
-module.exports = {
-    'highlightMenu': highlightMenu
-}
