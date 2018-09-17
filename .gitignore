@@ -338,4 +338,5 @@ dmypy.json
 
 ### Specified
 .vscode
+.sass-cache
 /app/static/lib/
