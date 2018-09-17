@@ -17,23 +17,22 @@
     "bootstrap": "*",
     "font-awesome": "*",
     "jquery": "*",
-    "sweetalert2": "*",
-    "toastr": "*",
+    "lodash": "*",
+    "popper": "*",
     "summernote": "*",
+    "toastr": "*",
     "vue": "*"
   },
   "devDependencies": {
-    "browserify": "",
-    "color": "*",
     "eslint": "*",
+    "webpack": "*",
+    "webpack-cli": "*",
+    "clean-webpack-plugin": "*",
     "eslint-plugin-html": "*",
-    "gulp": "*",
-    "gulp-autoprefixer": "*",
-    "gulp-clean-css": "*",
-    "gulp-concat": "*",
-    "gulp-imagemin": "*",
-    "gulp-livereload": "*",
-    "gulp-rename": "*",
-    "gulp-uglify": "*"
+    "uglifyjs-webpack-plugin": "*",
+    "vue-loader": "*",
+    "style-loader": "*",
+    "css-loader": "*",
+    "gulp": "*"
   }
 }
