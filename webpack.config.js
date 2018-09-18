@@ -10,7 +10,10 @@ module.exports = {
     },
     output: {
         filename: "[name].bundle.js",
-        path: path.join(__dirname, 'app/static/js')
+        path: path.join(__dirname, 'app/static/js'),
+        // lazy loading时此选项对应输出目录的公开URL，默认为根目录
+        publicPath: '/static/js/',
+        chunkFilename: '[id].chunk.js'
     },
     module: {
         rules: [
