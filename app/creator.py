@@ -75,13 +75,12 @@ def register_error_handler(app):
 
     @app.errorhandler(403)
     def forbidden_page(error):
-        return render_template('error/403.html', title='403 error'), 403
+        return render_template('error/base.html', title='403 error', msg='抱歉，您无权限访问此页面'), 403
 
     @app.errorhandler(404)
     def page_not_found(error):
-        return render_template('error/404.html', title='404 error'), 404
+        return render_template('error/base.html', title='404 error', msg='抱歉，该页面跑丢啦'), 404
 
     @app.errorhandler(500)
     def internal_server_error(error):
-        return render_template('error/500.html', title='500 error'), 500
-
+        return render_template('error/base.html', title='500 error', msg='服务器君罢工啦'), 500
