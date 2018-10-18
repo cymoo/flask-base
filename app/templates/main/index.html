@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 class="text-center">Do Not Go Gentle Into That Good Night</h1>
+<div class="text-center" id="demo">
+    <span>Do Not Go Gentle Into That Good Night</span>
+    <p is="hello"></p>
+</div>
+{% endblock %}
+
+{% block footer_js %}
+    <script src={{ static('js/test.bundle.js') }}></script>
 {% endblock %}

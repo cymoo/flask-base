@@ -8,7 +8,7 @@ module.exports = {
     entry: {
         main: './app/static/src/index.js',
         /* 测试lazy loading */
-        test: './app/static/src/testLazyLoading.js'
+        test: './app/static/src/testVue.js'
     },
     /* 若使用typeScript，则需配置resolve */
     // resolve: {

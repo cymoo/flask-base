@@ -24,15 +24,16 @@
     "vue": "*"
   },
   "devDependencies": {
-    "eslint": "*",
-    "webpack": "*",
-    "webpack-cli": "*",
     "clean-webpack-plugin": "*",
+    "css-loader": "*",
+    "eslint": "*",
     "eslint-plugin-html": "*",
+    "gulp": "*",
+    "style-loader": "*",
     "uglifyjs-webpack-plugin": "*",
     "vue-loader": "*",
-    "style-loader": "*",
-    "css-loader": "*",
-    "gulp": "*"
+    "vue-template-compiler": "^2.5.17",
+    "webpack": "*",
+    "webpack-cli": "*"
   }
 }
