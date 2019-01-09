@@ -7,12 +7,8 @@ from functools import wraps, partial
 import arrow
 from contextlib import contextmanager
 from flask import url_for, request, abort, current_app as app
-from jinja2 import Markup
 import string
 from numbers import Number
-
-# characters that not belong to 汉字 or digits or alphabet or `-` will be deemed as illegal
-ILLEGAL_CHAR = re.compile(r'[^\u4e00-\u9fa5\w\-]+')
 
 
 @contextmanager
@@ -49,26 +45,6 @@ random_upper_letters = partial(random_string, type='uppercase')
 random_lower_letters = partial(random_string, type='lowercase')
 
 
-def unique_filename(filename='', ext='', prefix='', suffix='', separator='-'):
-    """ a simple solution to generate unique filename """
-    if filename:
-        basename, ext = os.path.splitext(filename)
-        basename = ILLEGAL_CHAR.sub('', basename)
-    else:
-        basename = ''
-    unique_name = separator.join(filter(lambda x: x != '', [
-        prefix,
-        basename,
-        arrow.now().format('YYYYMMDDHHmmss'),
-        random_string(),
-        suffix
-    ]))
-
-    if ext and not ext.startswith('.'):
-        ext = '.' + ext
-    return unique_name + ext
-
-
 def gen_hash_password(password, salt=''):
     """ a very simple solution to generate hashed password """
     if salt == '':
@@ -83,29 +59,6 @@ def verify_password(password, hash_password, salt=''):
     if salt == '':
         salt = app.config['SECRET_KEY']
     return gen_hash_password(password, salt) == hash_password
-
-
-class Moment(object):
-    """ a helper-class for utilizing moment.js in Jinja2 """
-    def __init__(self, timestamp):
-        self.timestamp = timestamp
-
-    def render(self, args):
-        return Markup("<script>document.write(moment(\"%s\").%s);</script>" %
-                      (self.timestamp.strftime("%Y-%m-%dT%H:%M:%S Z"), args))
-
-    def format(self, fmt):
-        return self.render("format(\"%s\")" % fmt)
-
-    def calendar(self):
-        return self.render("calendar()")
-
-    def fromNow(self):
-        return self.render("fromNow()")
-
-    @staticmethod
-    def locale(args):
-        return Markup("<script>moment.locale(\"%s\");</script>" % args)
 
 
 if __name__ == '__main__':

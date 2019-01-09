@@ -3,6 +3,7 @@ Application factory
 ~~~~~~~~~~~~~~~~~~~
 """
 
+import json
 from flask import Flask, send_from_directory, render_template
 from .utils.helper import static
 
@@ -24,16 +25,15 @@ def create_app(config, static_folder='static', template_folder='templates'):
 
 
 def register_extensions(app):
-    # import redis
-    # rd = redis.StrictRedis(decode_responses=True)
-    # app.rd = rd
     pass
 
 
 def register_logger_handler(app):
+    if not app.config['LOG_ENABLED']:
+        return
     import logging
     handler = logging.FileHandler(filename=app.config['LOG_FILE'])
-    handler.setLevel(logging.WARNING)
+    handler.setLevel(app.config['LOG_LEVEL'])
     formatter = logging.Formatter(app.config['LOG_FORMAT'], style='{')
     handler.setFormatter(formatter)
     app.logger.addHandler(handler)
@@ -75,12 +75,12 @@ def register_error_handler(app):
 
     @app.errorhandler(403)
     def forbidden_page(error):
-        return render_template('error/base.html', title='403 error', msg='抱歉，您无权限访问此页面'), 403
+        return json.dumps({'err': '403 forbidden page'}), 403
 
     @app.errorhandler(404)
     def page_not_found(error):
-        return render_template('error/base.html', title='404 error', msg='抱歉，该页面跑丢啦'), 404
+        return json.dumps({'err': '404 page not found'}), 404
 
     @app.errorhandler(500)
     def internal_server_error(error):
-        return render_template('error/base.html', title='500 error', msg='服务器君罢工啦'), 500
+        return json.dumps({'err': '500 server error'}), 500

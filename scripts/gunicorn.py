@@ -9,7 +9,7 @@ import os
 # Server Socket
 # ~~~~~~~~~~~~~
 
-bind = '127.0.0.1:5000'
+bind = '127.0.0.1:' + (os.environ.get('PORT') or '5000')
 
 # The maximum number of pending connections.
 # This refers to the number of clients that can be waiting to be served.

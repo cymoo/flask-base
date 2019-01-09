@@ -1,8 +1,14 @@
-from flask import Blueprint, render_template, url_for
+from flask import (
+    Blueprint,
+    render_template,
+    url_for,
+    current_app as app
+)
 
 main = Blueprint('main', __name__)
 
 
 @main.route('/')
 def index():
-    return render_template('main/index.html', title = '首页')
+    app.logger.warning('hello logger')
+    return render_template('index.html', title = '首页')
