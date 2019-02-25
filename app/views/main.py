@@ -11,4 +11,4 @@ main = Blueprint('main', __name__)
 @main.route('/')
 def index():
     app.logger.warning('hello logger')
-    return render_template('index.html', title = '首页')
+    return render_template('index.html', title='hello flask')
