@@ -1,12 +1,10 @@
-gunicorn
-setproctitle
 flask
+monom
+pytest
+gunicorn
 pymongo
-mongoengine
-redis
 requests
 gevent
 arrow
 pillow
-flask-admin
 flask-script

@@ -1,6 +1,6 @@
 import gevent.monkey; gevent.monkey.patch_all()
 import signal
-import os
+import sys
 from flask_script import Manager
 from wsgi import flask_app as app
 
@@ -27,19 +27,12 @@ def runserver(host='127.0.0.1', port=5000, with_profile=False):
     from gevent.pywsgi import WSGIServer
     from werkzeug.serving import run_with_reloader
     from werkzeug.debug import DebuggedApplication
-    from werkzeug.contrib.profiler import ProfilerMiddleware
 
     port = int(port)
-
-    if with_profile:
-        f = open(app.config['PROFILE_PATH'], 'w')
-        wsgi = ProfilerMiddleware(app, f, restrictions=[30])
-    else:
-        wsgi = DebuggedApplication(app)
+    wsgi = DebuggedApplication(app)
 
     def handler(signum, frame):
-        print('\nbye...')
-        os._exit(0)
+        sys.exit(0)
 
     signal.signal(signal.SIGINT, handler)
 
