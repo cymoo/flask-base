@@ -1,10 +1,17 @@
 flask
-monom
-pytest
-gunicorn
-pymongo
-requests
+click
+python-dotenv
+Flask-Migrate
 gevent
-arrow
-pillow
-flask-script
+gunicorn
+pytest
+
+flask_sqlalchemy
+# mysqlclient
+
+# pymongo
+# monom
+
+# requests
+# arrow
+# pillow

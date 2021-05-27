@@ -85,8 +85,7 @@ limit_request_field_size = 8190
 # The default behavior is to attempt inotify with a fallback to file system polling.
 # Generally, inotify should be preferred if available because it consumes less system resources.
 # In order to use the inotify reloader, you must have the inotify package installed.
-# FIXME: error happens when using inotify?
-reload = True
+# reload = True
 
 # Extends reload option to also watch and reload on additional files
 # (e.g., templates, configurations, specifications, etc.).
@@ -94,7 +93,7 @@ reload_extra_files = []
 
 # Daemonize the Gunicorn process.
 # Detaches the server from the controlling terminal and enters the background.
-daemon = False
+# daemon = False
 
 # pidfile = '/path/to/.../pidfile'
 

@@ -3,8 +3,6 @@ Application factory
 ~~~~~~~~~~~~~~~~~~~
 """
 
-import json
-
 from flask import Flask, send_from_directory, Response
 
 from .utils import static
@@ -27,7 +25,7 @@ def create_app(config) -> Flask:
 
 
 def register_logger_handler(app: Flask) -> None:
-    if not app.config['LOG_ENABLED']:
+    if 'LOG_FILE' not in app.config:
         return
     import logging
     handler = logging.FileHandler(filename=app.config['LOG_FILE'])
@@ -38,7 +36,9 @@ def register_logger_handler(app: Flask) -> None:
 
 
 def register_db(app: Flask) -> None:
-    pass
+    from .models import db
+    db.init_app(app)
+    db.app = app
 
 
 def register_blueprints(app: Flask) -> None:
@@ -66,14 +66,13 @@ def register_before_handlers(app: Flask) -> None:
 
 def register_after_handlers(app: Flask) -> None:
     @app.after_request
-    def set_cors_headers(resp: Response):
-        resp.headers['Access-Control-Allow-Origin'] = app.config['ACCESS_CONTROL_ALLOW_ORIGIN']
-        resp.headers['Access-Control-Allow-Methods'] = app.config['ACCESS_CONTROL_ALLOW_METHODS']
-        resp.headers['Access-Control-Allow-Headers'] = app.config['ACCESS_CONTROL_ALLOW_HEADERS']
-        return resp
+    def set_cors_headers(res: Response):
+        res.headers['Access-Control-Allow-Origin'] = app.config['ACCESS_CONTROL_ALLOW_ORIGIN']
+        res.headers['Access-Control-Allow-Methods'] = app.config['ACCESS_CONTROL_ALLOW_METHODS']
+        res.headers['Access-Control-Allow-Headers'] = app.config['ACCESS_CONTROL_ALLOW_HEADERS']
+        return res
 
 
-# for json response
 def register_error_handler(app: Flask) -> None:
     @app.errorhandler(400)
     def bad_request(error):
@@ -94,4 +93,3 @@ def register_error_handler(app: Flask) -> None:
     @app.errorhandler(500)
     def server_error(error):
         return {'status': 'error', 'message': error.description}, 500
-
