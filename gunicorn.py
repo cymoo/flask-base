@@ -4,12 +4,11 @@ For details see: http://docs.gunicorn.org/en/latest/settings.html#settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 """
 import multiprocessing
-import os
 
 # Server Socket
 # ~~~~~~~~~~~~~
 
-bind = '127.0.0.1:' + (os.environ.get('PORT') or '5000')
+bind = '127.0.0.1:5000'
 
 # The maximum number of pending connections.
 # This refers to the number of clients that can be waiting to be served.
@@ -39,12 +38,12 @@ worker_connections = 1000
 # This is a simple method to help limit the damage of memory leaks.
 # If this is set to zero (the default) then the automatic worker
 # restarts are disabled.
-max_requests = 0
+# max_requests = 0
 
 # The jitter causes the restart per worker to be randomized by
 # randint(0, max_requests_jitter). This is intended to stagger worker
 # restarts to avoid all workers restarting at the same time.
-max_requests_jitter = 0
+# max_requests_jitter = 0
 
 # Workers silent for more than this many seconds are killed and restarted.
 # Only set this noticeably higher if you’re sure of the repercussions
@@ -69,13 +68,13 @@ keepalive = 3
 # ~~~~~~~~~~~~
 
 # The maximum size of HTTP request line in bytes.
-limit_request_line = 4096
+# limit_request_line = 4096
 
 # limit_request_fields
-limit_request_fields = 100
+# limit_request_fields = 100
 
 # Limit the allowed size of an HTTP request header field.
-limit_request_field_size = 8190
+# limit_request_field_size = 8190
 
 # Debugging
 # ~~~~~~~~~~~~~~
@@ -85,15 +84,15 @@ limit_request_field_size = 8190
 # The default behavior is to attempt inotify with a fallback to file system polling.
 # Generally, inotify should be preferred if available because it consumes less system resources.
 # In order to use the inotify reloader, you must have the inotify package installed.
-# reload = True
+reload = False
 
 # Extends reload option to also watch and reload on additional files
 # (e.g., templates, configurations, specifications, etc.).
-reload_extra_files = []
+# reload_extra_files = []
 
 # Daemonize the Gunicorn process.
 # Detaches the server from the controlling terminal and enters the background.
-# daemon = False
+daemon = True
 
 # pidfile = '/path/to/.../pidfile'
 
