@@ -18,9 +18,7 @@ def create_app(config) -> Flask:
     register_template_env(app)
     register_template_filters(app)
     register_file_uploads(app)
-    register_before_handlers(app)
     register_after_handlers(app)
-    register_error_handler(app)
     return app
 
 
@@ -60,36 +58,12 @@ def register_file_uploads(app: Flask) -> None:
         return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 
-def register_before_handlers(app: Flask) -> None:
-    pass
-
-
 def register_after_handlers(app: Flask) -> None:
     @app.after_request
-    def set_cors_headers(res: Response):
-        res.headers['Access-Control-Allow-Origin'] = app.config['ACCESS_CONTROL_ALLOW_ORIGIN']
-        res.headers['Access-Control-Allow-Methods'] = app.config['ACCESS_CONTROL_ALLOW_METHODS']
-        res.headers['Access-Control-Allow-Headers'] = app.config['ACCESS_CONTROL_ALLOW_HEADERS']
+    def set_cors_headers(res: Response) -> Response:
+        config = app.config
+        headers = res.headers
+        headers['Access-Control-Allow-Origin'] = config['ACCESS_CONTROL_ALLOW_ORIGIN']
+        headers['Access-Control-Allow-Methods'] = config['ACCESS_CONTROL_ALLOW_METHODS']
+        headers['Access-Control-Allow-Headers'] = config['ACCESS_CONTROL_ALLOW_HEADERS']
         return res
-
-
-def register_error_handler(app: Flask) -> None:
-    @app.errorhandler(400)
-    def bad_request(error):
-        return {'status': 'error', 'message': error.description}, 400
-
-    @app.errorhandler(401)
-    def unauthorized_page(error):
-        return {'status': 'error', 'message': error.description}, 401
-
-    @app.errorhandler(403)
-    def forbidden_page(error):
-        return {'status': 'error', 'message': error.description}, 403
-
-    @app.errorhandler(404)
-    def not_found(error):
-        return {'status': 'error', 'message': error.description}, 404
-
-    @app.errorhandler(500)
-    def server_error(error):
-        return {'status': 'error', 'message': error.description}, 500

@@ -1,3 +1,4 @@
+import json
 import random
 import string
 import time
@@ -6,7 +7,10 @@ from typing import Callable
 
 from flask import (
     url_for,
+    make_response,
 )
+from flask.wrappers import Response
+from werkzeug.exceptions import default_exceptions
 
 
 class Timer:
@@ -65,6 +69,21 @@ random_digits = partial(random_string, str_type='digit')
 random_letters = partial(random_string, str_type='letter')
 random_upper_letters = partial(random_string, str_type='uppercase')
 random_lower_letters = partial(random_string, str_type='lowercase')
+
+
+def http_json_error(code: int, description: str = '', **kw) -> Response:
+    if not description:
+        if code in default_exceptions:
+            description = default_exceptions[code].description
+        else:
+            description = 'Internal Server Server'
+
+    res = make_response(json.dumps(
+        {'status': 'error', 'description': description}, **kw)
+    )
+    res.headers['Content-Type'] = 'application/json'
+    res.status_code = code
+    return res
 
 
 if __name__ == '__main__':

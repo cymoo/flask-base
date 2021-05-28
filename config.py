@@ -34,7 +34,7 @@ class ProductionConfig(Config):
     DEBUG = False
 
     # logging
-    LOG_FILE = '/path/to/log-file'
+    # LOG_FILE = '/path/to/log-file'
     LOG_LEVEL = logging.WARNING
     LOG_FORMAT = '[{asctime}] {levelname}: {message} [in {pathname}:{lineno}]'
 

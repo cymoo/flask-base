@@ -1,5 +1,6 @@
 flask
 click
+werkzeug
 python-dotenv
 Flask-Migrate
 gevent
